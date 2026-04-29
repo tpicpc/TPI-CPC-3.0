@@ -3,6 +3,7 @@ import { ok, serverError } from "@/lib/api-response";
 import { connectDB } from "@/lib/db";
 import Advisor from "@/models/Advisor";
 import Blog from "@/models/Blog";
+import ContactMessage from "@/models/ContactMessage";
 import Event from "@/models/Event";
 import Leaderboard from "@/models/Leaderboard";
 import Notice from "@/models/Notice";
@@ -16,7 +17,7 @@ export async function GET(req) {
     const auth = requireAuth(req, "admin");
     if (auth.error) return authError(auth.error, auth.status);
     await connectDB();
-    const [users, teams, advisors, events, workshops, blogs, reviews, notices, leaderboard] = await Promise.all([
+    const [users, teams, advisors, events, workshops, blogs, reviews, notices, leaderboard, contacts, contactsUnread] = await Promise.all([
       User.countDocuments(),
       Team.countDocuments(),
       Advisor.countDocuments(),
@@ -26,8 +27,10 @@ export async function GET(req) {
       Review.countDocuments(),
       Notice.countDocuments({ isActive: true }),
       Leaderboard.countDocuments(),
+      ContactMessage.countDocuments(),
+      ContactMessage.countDocuments({ read: false }),
     ]);
-    return ok({ stats: { users, teams, advisors, events, workshops, blogs, reviews, notices, leaderboard } });
+    return ok({ stats: { users, teams, advisors, events, workshops, blogs, reviews, notices, leaderboard, contacts, contactsUnread } });
   } catch (e) {
     return serverError(e);
   }

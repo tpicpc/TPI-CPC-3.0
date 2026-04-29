@@ -3,7 +3,7 @@
 import PageHeader from "@/components/admin/PageHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { adminApi } from "@/lib/api-client";
-import { Bell, BookOpen, CalendarDays, GraduationCap, MessageSquare, Newspaper, Trophy, UserCog, Users } from "lucide-react";
+import { Bell, BookOpen, CalendarDays, GraduationCap, Inbox, MessageSquare, Newspaper, Trophy, UserCog, Users } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -15,6 +15,7 @@ const cards = [
   { key: "workshops", label: "Courses", icon: GraduationCap, color: "bg-amber-500", href: "/admin/workshops" },
   { key: "blogs", label: "Blogs", icon: Newspaper, color: "bg-pink-500", href: "/admin/blogs" },
   { key: "reviews", label: "Reviews", icon: MessageSquare, color: "bg-orange-500", href: "/admin/reviews" },
+  { key: "contacts", label: "Contact Messages", icon: Inbox, color: "bg-cyan-500", href: "/admin/contacts", badgeKey: "contactsUnread" },
   { key: "notices", label: "Active Notices", icon: Bell, color: "bg-red-500", href: "/admin/notices" },
   { key: "leaderboard", label: "Leaderboard", icon: Trophy, color: "bg-yellow-500", href: "/admin/leaderboard" },
 ];
@@ -40,9 +41,15 @@ export default function AdminHomePage() {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {cards.map((c) => {
           const Icon = c.icon;
+          const badgeCount = c.badgeKey ? stats[c.badgeKey] ?? 0 : 0;
           return (
             <Link key={c.key} href={c.href}>
-              <Card className="hover:shadow-md transition cursor-pointer h-full">
+              <Card className="hover:shadow-md transition cursor-pointer h-full relative">
+                {badgeCount > 0 && (
+                  <span className="absolute top-2 right-2 inline-flex items-center justify-center text-[10px] font-bold w-5 h-5 rounded-full bg-red-500 text-white">
+                    {badgeCount}
+                  </span>
+                )}
                 <CardContent className="p-5 flex items-center gap-4">
                   <div className={`w-12 h-12 rounded-lg ${c.color} text-white flex items-center justify-center`}>
                     <Icon size={22} />

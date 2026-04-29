@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Facebook, Mail, MapPin, Send } from "lucide-react";
+import axios from "axios";
+import { Facebook, LoaderCircle, Mail, MapPin, Send } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -13,14 +14,26 @@ export default function ContactSection() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sending, setSending] = useState(false);
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    if (form.message.trim().length < 5) {
+      toast.error("Please write a longer message");
+      return;
+    }
     setSending(true);
-    const subject = encodeURIComponent(`Contact from ${form.name || "TPI CPC website"}`);
-    const body = encodeURIComponent(`From: ${form.name} <${form.email}>\n\n${form.message}`);
-    window.location.href = `mailto:tpicpc@gmail.com?subject=${subject}&body=${body}`;
-    toast.success("Opening your email client");
-    setTimeout(() => setSending(false), 1500);
+    try {
+      const { data } = await axios.post("/api/v1/contact", form);
+      if (data.success) {
+        toast.success(data.message || "Message sent — we'll get back to you soon");
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        toast.error(data.message || "Failed to send");
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Failed to send message");
+    } finally {
+      setSending(false);
+    }
   };
 
   const cardCls =
@@ -104,8 +117,12 @@ export default function ContactSection() {
                 By sending, you agree to be contacted at the email provided.
               </p>
               <Button type="submit" disabled={sending} className="bg-gradient-to-r from-indigo-500 to-violet-500 hover:opacity-90 text-white px-6">
-                <Send size={16} className="mr-2" />
-                Send message
+                {sending ? (
+                  <LoaderCircle size={16} className="mr-2 animate-spin" />
+                ) : (
+                  <Send size={16} className="mr-2" />
+                )}
+                {sending ? "Sending..." : "Send message"}
               </Button>
             </div>
           </form>

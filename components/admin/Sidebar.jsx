@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import {
+  ArrowLeft,
   Award,
   BarChart3,
   Bell,
@@ -11,6 +12,7 @@ import {
   FolderGit2,
   GraduationCap,
   HelpCircle,
+  Inbox,
   LayoutDashboard,
   MessageSquare,
   Newspaper,
@@ -52,6 +54,10 @@ const groups = [
     ],
   },
   {
+    label: "Inbox",
+    items: [{ href: "/admin/contacts", icon: Inbox, label: "Contact Messages" }],
+  },
+  {
     label: "Account",
     items: [{ href: "/admin/profile", icon: BarChart3, label: "Profile" }],
   },
@@ -69,13 +75,32 @@ export default function Sidebar({ open, onClose }) {
           open ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <div className="px-5 py-5 border-b flex items-center justify-between">
-          <Link href="/admin" className="text-lg font-extrabold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-            TPI CPC Admin
+        <div className="px-5 pt-5 pb-3 border-b">
+          <div className="flex items-center justify-between">
+            <Link
+              href="/"
+              title="Back to main website"
+              className="flex items-center gap-2.5 hover:opacity-80 transition"
+            >
+              <img
+                src="/tpicpc_logo.png"
+                alt="TPI CPC"
+                className="w-9 h-9 rounded-md object-contain"
+              />
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                Admin
+              </span>
+            </Link>
+            <button onClick={onClose} className="lg:hidden text-gray-500 hover:text-gray-900">
+              <X size={20} />
+            </button>
+          </div>
+          <Link
+            href="/"
+            className="mt-2 inline-flex items-center gap-1.5 text-xs text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition"
+          >
+            <ArrowLeft size={12} /> Back to main site
           </Link>
-          <button onClick={onClose} className="lg:hidden text-gray-500 hover:text-gray-900">
-            <X size={20} />
-          </button>
         </div>
         <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-6">
           {groups.map((g) => (
