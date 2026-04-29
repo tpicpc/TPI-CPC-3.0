@@ -303,6 +303,14 @@ After running locally with seeded admin:
 
 ---
 
+## Documentation
+
+- **[USER_GUIDE.md](./USER_GUIDE.md)** — full website walkthrough for visitors, members, and admins (every page, every button)
+- **[DEPLOYMENT.md](./DEPLOYMENT.md)** — Vercel + MongoDB Atlas deployment walkthrough
+- **README.md** (this file) — developer setup, tech stack, folder layout, API surface
+
+---
+
 ## Deploy
 
 See **[DEPLOYMENT.md](./DEPLOYMENT.md)** for the full Vercel + MongoDB Atlas walkthrough.
