@@ -4,6 +4,25 @@ import { formatDateTime } from "@/lib/utils";
 import { Calendar, Clock, MapPin, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 
+function DateStamp({ startTime }) {
+  if (!startTime) return null;
+  const d = new Date(startTime);
+  const day = d.getDate();
+  const month = d.toLocaleString("en-US", { month: "short" }).toUpperCase();
+  const year = d.getFullYear();
+  return (
+    <div className="absolute top-2 left-2 z-10 bg-white/95 dark:bg-gray-950/95 backdrop-blur rounded-lg shadow-lg overflow-hidden text-center w-14 border border-white/30">
+      <div className="bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-[9px] font-bold tracking-widest py-0.5">
+        {month}
+      </div>
+      <div className="text-xl font-extrabold text-gray-900 dark:text-white leading-tight pt-0.5">
+        {day}
+      </div>
+      <div className="text-[9px] text-gray-500 dark:text-gray-400 pb-1">{year}</div>
+    </div>
+  );
+}
+
 function getCountdown(startTime) {
   if (!startTime) return null;
   const target = new Date(startTime).getTime();
@@ -58,6 +77,7 @@ export default function EventCard({ event, layout = "vertical" }) {
       <div className={`${containerCls} md:flex-row`}>
         <div className="relative md:w-56 shrink-0 overflow-hidden">
           <img src={event.eventImage} alt={event.title} className="w-full h-48 md:h-full object-cover" />
+          <DateStamp startTime={event.startTime} />
           {isUpcoming && <span className="upcoming-shine" />}
         </div>
         <div className="p-5 flex-1">
@@ -81,12 +101,10 @@ export default function EventCard({ event, layout = "vertical" }) {
     <div className={containerCls}>
       <div className="relative aspect-video overflow-hidden">
         <img src={event.eventImage} alt={event.title} className={`w-full h-full object-cover ${isUpcoming ? "transition-transform duration-700 hover:scale-110" : ""}`} />
+        <DateStamp startTime={event.startTime} />
         {isUpcoming && <span className="upcoming-shine" />}
         {isUpcoming && (
-          <div className="absolute top-2 left-2 right-2 flex items-start justify-between">
-            <span className="text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded bg-black/60 text-white backdrop-blur-sm">
-              {event.eventType}
-            </span>
+          <div className="absolute top-2 right-2 flex items-start justify-end">
             {statusBadge}
           </div>
         )}

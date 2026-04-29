@@ -1,10 +1,24 @@
 "use client";
 
+import EventCard from "@/components/EventCard";
 import SectionTitle from "@/components/SectionTitle";
 import { CardGridSkeleton } from "@/components/skeletons";
-import { formatDateTime } from "@/lib/utils";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+
+const STATUS_RANK = { Ongoing: 0, Upcoming: 1, Completed: 2 };
+
+function sortByRelevance(list) {
+  return [...list].sort((a, b) => {
+    const ra = STATUS_RANK[a.status] ?? 3;
+    const rb = STATUS_RANK[b.status] ?? 3;
+    if (ra !== rb) return ra - rb;
+    const ta = new Date(a.startTime).getTime();
+    const tb = new Date(b.startTime).getTime();
+    if (a.status === "Completed") return tb - ta;
+    return ta - tb;
+  });
+}
 
 export default function EventsPage() {
   const [events, setEvents] = useState([]);
@@ -22,7 +36,10 @@ export default function EventsPage() {
     })();
   }, []);
 
-  const filtered = filter === "All" ? events : events.filter((e) => e.status === filter);
+  const filtered = useMemo(() => {
+    const base = filter === "All" ? events : events.filter((e) => e.status === filter);
+    return sortByRelevance(base);
+  }, [events, filter]);
 
   return (
     <div className="px-4 md:px-10 container mx-auto py-16">
@@ -51,25 +68,7 @@ export default function EventsPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {filtered.map((e) => (
-            <div key={e._id} className="rounded-xl border bg-white dark:bg-gray-900 overflow-hidden hover:shadow-xl transition">
-              <img src={e.eventImage} alt={e.title} className="w-full h-48 object-cover" />
-              <div className="p-5">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs px-2 py-1 rounded bg-indigo-100 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-300">{e.eventType}</span>
-                  <span className={`text-xs px-2 py-1 rounded ${
-                    e.status === "Upcoming" ? "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300" :
-                    e.status === "Ongoing" ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300" :
-                    "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300"
-                  }`}>{e.status}</span>
-                </div>
-                <h3 className="font-bold text-lg mt-1 line-clamp-2">{e.title}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300 mt-2 line-clamp-3">{e.description}</p>
-                <div className="mt-4 text-xs text-gray-500 dark:text-gray-400">
-                  📍 {e.location} <br />
-                  🕒 {formatDateTime(e.startTime)}
-                </div>
-              </div>
-            </div>
+            <EventCard key={e._id} event={e} />
           ))}
         </div>
       )}

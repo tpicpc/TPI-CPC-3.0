@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { adminApi } from "@/lib/api-client";
 import { formatDate } from "@/lib/utils";
-import { CheckCircle2, Clock, ExternalLink, Github, Heart, LoaderCircle, MessageSquare, Star, Trash2, XCircle } from "lucide-react";
+import { CheckCircle2, Clock, Edit, ExternalLink, Github, Heart, LoaderCircle, MessageSquare, Star, Trash2, XCircle } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
@@ -116,6 +116,7 @@ export default function AdminProjectsPage() {
 
                 <div className="flex flex-wrap items-center gap-2 mt-3">
                   <Link href={`/projects/${p._id}`} target="_blank"><Button size="sm" variant="outline">View</Button></Link>
+                  <Link href={`/admin/projects/${p._id}/edit`}><Button size="sm" variant="outline"><Edit size={14} className="mr-1" /> Edit</Button></Link>
                   {p.status !== "approved" && <Button size="sm" onClick={() => onApprove(p._id)} className="bg-green-600 hover:bg-green-700 text-white"><CheckCircle2 size={14} className="mr-1" /> Approve</Button>}
                   {p.status !== "rejected" && <Button size="sm" variant="outline" onClick={() => onReject(p._id)} className="text-red-600"><XCircle size={14} className="mr-1" /> Reject</Button>}
                   {p.status === "approved" && (

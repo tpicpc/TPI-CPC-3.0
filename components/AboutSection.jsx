@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import SectionTitle from "@/components/SectionTitle";
+import { CalendarDays } from "lucide-react";
 
 export default function AboutSection() {
   return (
@@ -21,8 +22,12 @@ export default function AboutSection() {
         </div>
 
         <div className="space-y-5">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-500/10 dark:bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 text-xs font-semibold border border-indigo-500/20">
+            <CalendarDays size={13} />
+            Founded · 15 January 2023
+          </div>
           <p className="text-base md:text-lg leading-relaxed text-gray-700 dark:text-gray-200">
-            <span className="font-semibold text-gray-900 dark:text-white">TPI CPC</span> is a vibrant community of students who love coding, problem-solving, and innovation. Our mission is to build a collaborative space where learners can sharpen their skills, explore new technologies, and prepare for real-world challenges.
+            <span className="font-semibold text-gray-900 dark:text-white">TPI CPC</span> is a vibrant community of students who love coding, problem-solving, and innovation. Founded on <strong className="text-gray-900 dark:text-white">15 January 2023</strong>, our mission is to build a collaborative space where learners can sharpen their skills, explore new technologies, and prepare for real-world challenges.
           </p>
           <p className="text-base md:text-lg leading-relaxed text-gray-700 dark:text-gray-200">
             We host <strong className="text-gray-900 dark:text-white">workshops, seminars, hackathons,</strong> and <strong className="text-gray-900 dark:text-white">coding contests</strong> to inspire our members. From skill growth and leadership to career opportunities and networking, TPI CPC helps every student shine.

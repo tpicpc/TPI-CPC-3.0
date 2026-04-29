@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { formatDate } from "@/lib/utils";
 import axios from "axios";
-import { CheckCircle2, Clock, ExternalLink, FolderGit2, Heart, LoaderCircle, Plus, XCircle } from "lucide-react";
+import { CheckCircle2, Clock, Edit, ExternalLink, FolderGit2, Heart, LoaderCircle, Plus, XCircle } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -62,11 +62,20 @@ export default function MyProjectsPage() {
                 {p.status === "rejected" && p.rejectionReason && (
                   <p className="text-xs text-red-600 mt-2 italic">Reason: {p.rejectionReason}</p>
                 )}
-                {p.status === "approved" && (
-                  <Link href={`/projects/${p._id}`} target="_blank" className="inline-flex items-center gap-1 text-xs text-indigo-500 mt-3 hover:underline">
-                    <ExternalLink size={12} /> View public page
+                <div className="flex items-center gap-2 mt-3 flex-wrap">
+                  <Link href={`/dashboard/projects/${p._id}/edit`}>
+                    <Button size="sm" variant="outline">
+                      <Edit size={13} className="mr-1" /> Edit
+                    </Button>
                   </Link>
-                )}
+                  {p.status === "approved" && (
+                    <Link href={`/projects/${p._id}`} target="_blank">
+                      <Button size="sm" variant="outline">
+                        <ExternalLink size={13} className="mr-1" /> View public
+                      </Button>
+                    </Link>
+                  )}
+                </div>
               </CardContent>
             </Card>
           ))}

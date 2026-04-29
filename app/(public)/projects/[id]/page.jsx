@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useUser } from "@/contexts/UserContext";
 import { formatDate } from "@/lib/utils";
 import axios from "axios";
-import { ArrowLeft, ExternalLink, Github, Heart, LoaderCircle, MessageSquare, Send, Trash2 } from "lucide-react";
+import { ArrowLeft, Edit, ExternalLink, Github, Heart, LoaderCircle, MessageSquare, Send, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -123,7 +123,16 @@ export default function ProjectDetailPage() {
                 <span key={t} className="text-xs px-2 py-1 rounded bg-indigo-500/15 text-indigo-700 dark:text-indigo-300">#{t}</span>
               ))}
             </div>
-            <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white">{project.title}</h1>
+            <div className="flex items-start justify-between gap-3 flex-wrap">
+              <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white">{project.title}</h1>
+              {userData && String(project.owner?._id) === String(userData._id) && (
+                <Link href={`/dashboard/projects/${project._id}/edit`}>
+                  <Button size="sm" variant="outline">
+                    <Edit size={13} className="mr-1" /> Edit project
+                  </Button>
+                </Link>
+              )}
+            </div>
             <p className="mt-4 text-gray-700 dark:text-gray-300 whitespace-pre-line leading-relaxed">{project.description}</p>
 
             <div className="flex items-center flex-wrap gap-3 mt-6">
