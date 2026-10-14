@@ -61,7 +61,7 @@ export default function CertificateViewPage() {
             <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3 font-serif tracking-wide">{cert.recipientName}</h2>
             <p className="text-base text-gray-600 leading-relaxed max-w-2xl mx-auto">
               has successfully {cert.type === "course" ? "completed" : "participated in"}{" "}
-              <strong className="text-indigo-700">"{cert.referenceTitle}"</strong>
+              <strong className="text-indigo-700">&quot;{cert.referenceTitle}&quot;</strong>
               {cert.instructor && <> conducted by <strong>{cert.instructor}</strong></>}
               {cert.grade && <> with a grade of <strong>{cert.grade}</strong></>}
               {" "}organised by TPI CPC — Computer & Programming Club.

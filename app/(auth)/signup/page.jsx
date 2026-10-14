@@ -148,7 +148,7 @@ export default function SignupPage() {
                 <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
                 <Input id="email" type="email" required value={form.email} onChange={(e) => update("email", e.target.value)} placeholder="you@gmail.com" className="pl-9" autoComplete="email" />
               </div>
-              <p className="text-[11px] text-gray-500">We'll send a 4-digit verification code to this email.</p>
+              <p className="text-[11px] text-gray-500">We&apos;ll send a 4-digit verification code to this email.</p>
             </div>
 
             <div className="space-y-1.5">
@@ -225,7 +225,7 @@ export default function SignupPage() {
             <div className="rounded-lg bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-200 dark:border-indigo-500/20 px-3 py-2.5 flex items-start gap-2.5">
               <ShieldCheck className="text-indigo-500 mt-0.5 shrink-0" size={16} />
               <p className="text-[12px] text-indigo-700 dark:text-indigo-300 leading-snug">
-                After signup, we'll email a 4-digit code to verify your address. Verification unlocks course enrollment.
+                After signup, we&apos;ll email a 4-digit code to verify your address. Verification unlocks course enrollment.
               </p>
             </div>
 

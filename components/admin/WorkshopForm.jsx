@@ -130,7 +130,7 @@ export default function WorkshopForm({ id }) {
                     onChange={(e) => setForm({ ...form, releaseDate: e.target.value })}
                   />
                   <p className="text-xs text-amber-700 dark:text-amber-400/80">
-                    Shown on the public Coming Soon card. Leave empty if you haven't picked a date yet.
+                    Shown on the public Coming Soon card. Leave empty if you haven&apos;t picked a date yet.
                   </p>
                 </div>
               )}

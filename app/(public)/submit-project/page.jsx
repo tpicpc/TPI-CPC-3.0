@@ -95,7 +95,7 @@ export default function SubmitProjectPage() {
         <ShieldCheck className="text-indigo-500 mt-0.5 shrink-0" size={18} />
         <div className="text-sm text-indigo-700 dark:text-indigo-300">
           <strong>Tips:</strong> include a clean cover image, a few screenshots, a demo URL, and a GitHub link.
-          The clearer the description, the faster you'll get approved.
+          The clearer the description, the faster you&apos;ll get approved.
         </div>
       </div>
 

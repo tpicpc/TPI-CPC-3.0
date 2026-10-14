@@ -12,6 +12,7 @@ import {
   User,
   X,
 } from "lucide-react";
+import { FEATURES } from "@/lib/features";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -20,7 +21,7 @@ const items = [
   { href: "/dashboard/profile", icon: User, label: "Profile" },
   { href: "/dashboard/enrollments", icon: BookOpen, label: "My Courses" },
   { href: "/dashboard/certificates", icon: Award, label: "Certificates" },
-  { href: "/dashboard/projects", icon: FolderGit2, label: "My Projects" },
+  ...(FEATURES.projects ? [{ href: "/dashboard/projects", icon: FolderGit2, label: "My Projects" }] : []),
   { href: "/dashboard/blogs", icon: Newspaper, label: "My Blogs" },
   { href: "/dashboard/questions", icon: HelpCircle, label: "My Questions" },
 ];
