@@ -63,7 +63,7 @@ export default function ResourcesPage() {
         <div className="text-center py-12 rounded-xl border border-dashed">
           <FileText className="mx-auto text-indigo-500 mb-3" size={32} />
           <p className="text-gray-700 dark:text-gray-300 font-medium">No resources yet</p>
-          <p className="text-sm text-gray-500 mt-1">Check back soon — we're curating content for you.</p>
+          <p className="text-sm text-gray-500 mt-1">Check back soon — we&apos;re curating content for you.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">

@@ -147,7 +147,7 @@ export default function VerifyEmailPage() {
           )}
 
           <div className="text-center text-sm text-muted-foreground">
-            Didn't get the code?{" "}
+            Didn&apos;t get the code?{" "}
             {cooldown > 0 ? (
               <span>Resend in {cooldown}s</span>
             ) : (

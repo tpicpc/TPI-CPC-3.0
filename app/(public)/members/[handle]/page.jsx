@@ -7,6 +7,7 @@ import { formatDate } from "@/lib/utils";
 import axios from "axios";
 import { ArrowLeft, BadgeCheck, BookOpen, Calendar, FolderGit2, Heart, Newspaper } from "lucide-react";
 import Link from "next/link";
+import { FEATURES } from "@/lib/features";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -36,7 +37,7 @@ export default function MemberProfilePage() {
 
   return (
     <div className="px-4 md:px-10 container mx-auto py-10">
-      <Link href="/projects" className="inline-flex items-center gap-2 text-sm text-indigo-500 hover:underline mb-6">
+      <Link href={FEATURES.projects ? "/projects" : "/"} className="inline-flex items-center gap-2 text-sm text-indigo-500 hover:underline mb-6">
         <ArrowLeft size={16} /> Back
       </Link>
 
@@ -75,7 +76,8 @@ export default function MemberProfilePage() {
         </div>
       </div>
 
-      {/* Projects */}
+      {/* Projects (hidden while FEATURES.projects is false) */}
+      {FEATURES.projects && (
       <Section title="Projects" icon={<FolderGit2 size={18} />} count={projects.length}>
         {projects.length === 0 ? (
           <Empty>No public projects yet.</Empty>
@@ -95,6 +97,7 @@ export default function MemberProfilePage() {
           </div>
         )}
       </Section>
+      )}
 
       {/* Blogs */}
       <Section title="Blog posts" icon={<Newspaper size={18} />} count={blogs.length}>
@@ -120,7 +123,7 @@ export default function MemberProfilePage() {
       {/* Enrolled courses */}
       <Section title="Enrolled courses" icon={<BookOpen size={18} />} count={enrollments.length}>
         {enrollments.length === 0 ? (
-          <Empty>Hasn't enrolled in any courses yet.</Empty>
+          <Empty>Hasn&apos;t enrolled in any courses yet.</Empty>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {enrollments.map((e) => (

@@ -76,7 +76,7 @@ export default function WorkshopPage() {
         <div className="text-center py-12 rounded-xl border border-dashed border-gray-200 dark:border-white/10 bg-white/50 dark:bg-white/5">
           <Sparkles className="mx-auto text-indigo-500 mb-3" size={32} />
           <p className="text-gray-700 dark:text-gray-300 font-medium">More courses coming soon</p>
-          <p className="text-sm text-gray-500 mt-1">Stay tuned — we're cooking up something special.</p>
+          <p className="text-sm text-gray-500 mt-1">Stay tuned — we&apos;re cooking up something special.</p>
         </div>
       ) : (
         <div className="space-y-12">

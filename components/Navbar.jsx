@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useUser } from "@/contexts/UserContext";
 import { navLink } from "@/lib/assets";
+import { FEATURES } from "@/lib/features";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ChevronDown,
@@ -223,6 +224,7 @@ export default function Navbar() {
                       >
                         <PenSquare size={15} className="text-gray-500" /> Write a Blog
                       </Link>
+                      {FEATURES.projects && (
                       <Link
                         href="/submit-project"
                         className="flex items-center gap-2.5 px-3 py-2 rounded-md text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/10 transition"
@@ -230,6 +232,7 @@ export default function Navbar() {
                       >
                         <FolderGit2 size={15} className="text-gray-500" /> Submit Project
                       </Link>
+                      )}
                     </div>
                     <div className="p-1 border-t border-gray-100 dark:border-white/5">
                       <button

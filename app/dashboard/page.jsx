@@ -7,6 +7,7 @@ import { useUser } from "@/contexts/UserContext";
 import axios from "axios";
 import { Award, BadgeCheck, BookOpen, FolderGit2, HelpCircle, LoaderCircle, Newspaper, Plus, ShieldAlert, Sparkles } from "lucide-react";
 import Link from "next/link";
+import { FEATURES } from "@/lib/features";
 import { useEffect, useState } from "react";
 
 export default function DashboardOverview() {
@@ -41,7 +42,7 @@ export default function DashboardOverview() {
           </div>
           <div className="flex gap-2 flex-wrap">
             <Link href="/workshop"><Button variant="outline" className="bg-white/15 text-white border-white/30 hover:bg-white/25">Browse courses</Button></Link>
-            <Link href="/submit-project"><Button className="bg-white text-indigo-600 hover:bg-white/90"><Plus size={15} className="mr-1.5" /> Submit Project</Button></Link>
+            {FEATURES.projects && <Link href="/submit-project"><Button className="bg-white text-indigo-600 hover:bg-white/90"><Plus size={15} className="mr-1.5" /> Submit Project</Button></Link>}
           </div>
         </div>
       </div>
@@ -52,7 +53,7 @@ export default function DashboardOverview() {
           <ShieldAlert className="text-amber-600 shrink-0" size={20} />
           <div className="flex-1 min-w-0">
             <p className="font-semibold text-amber-700 dark:text-amber-400">Verify your email</p>
-            <p className="text-sm text-amber-600/80 dark:text-amber-400/80">You can't enroll in courses or post until you verify your email.</p>
+            <p className="text-sm text-amber-600/80 dark:text-amber-400/80">You can&apos;t enroll in courses or post until you verify your email.</p>
           </div>
           <Link href="/verify-email"><Button size="sm" className="bg-amber-500 hover:bg-amber-600 text-white">Verify now</Button></Link>
         </div>
@@ -71,7 +72,7 @@ export default function DashboardOverview() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
             <StatCard icon={<BookOpen size={20} />} label="Enrolled courses" value={stats.enrollments} color="bg-indigo-500" href="/dashboard/enrollments" />
             <StatCard icon={<Award size={20} />} label="Certificates" value={stats.certificates} color="bg-amber-500" href="/dashboard/certificates" />
-            <StatCard icon={<FolderGit2 size={20} />} label="Projects" value={stats.projects.approved} subtitle={stats.projects.pending ? `${stats.projects.pending} pending` : null} color="bg-violet-500" href="/dashboard/projects" />
+            {FEATURES.projects && <StatCard icon={<FolderGit2 size={20} />} label="Projects" value={stats.projects.approved} subtitle={stats.projects.pending ? `${stats.projects.pending} pending` : null} color="bg-violet-500" href="/dashboard/projects" />}
             <StatCard icon={<Newspaper size={20} />} label="Blog posts" value={stats.blogs.approved} subtitle={stats.blogs.pending ? `${stats.blogs.pending} pending` : null} color="bg-pink-500" href="/dashboard/blogs" />
           </div>
 
@@ -81,7 +82,7 @@ export default function DashboardOverview() {
               <h3 className="font-bold text-lg text-gray-900 dark:text-white mb-3">Quick actions</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 <QuickAction href="/workshop" icon={<BookOpen size={16} />} label="Find a course" />
-                <QuickAction href="/submit-project" icon={<FolderGit2 size={16} />} label="Submit project" />
+                {FEATURES.projects && <QuickAction href="/submit-project" icon={<FolderGit2 size={16} />} label="Submit project" />}
                 <QuickAction href="/submit-blog" icon={<Newspaper size={16} />} label="Write blog" />
                 <QuickAction href="/forum/ask" icon={<HelpCircle size={16} />} label="Ask question" />
               </div>
@@ -90,6 +91,7 @@ export default function DashboardOverview() {
 
           {/* Activity highlights */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {FEATURES.projects && (
             <Card>
               <CardContent className="p-6">
                 <h3 className="font-bold text-base mb-4 flex items-center gap-2 text-gray-900 dark:text-white">
@@ -103,6 +105,7 @@ export default function DashboardOverview() {
                 </div>
               </CardContent>
             </Card>
+            )}
             <Card>
               <CardContent className="p-6">
                 <h3 className="font-bold text-base mb-4 flex items-center gap-2 text-gray-900 dark:text-white">

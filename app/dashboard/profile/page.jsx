@@ -195,7 +195,7 @@ export default function DashboardProfilePage() {
               <div className="space-y-1.5">
                 <Label>Email</Label>
                 <Input value={userData?.email || ""} disabled />
-                <p className="text-[11px] text-gray-500">Email can't be changed.</p>
+                <p className="text-[11px] text-gray-500">Email can&apos;t be changed.</p>
               </div>
               <div className="space-y-1.5">
                 <Label>Mobile</Label>
