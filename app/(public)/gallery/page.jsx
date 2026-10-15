@@ -1,8 +1,7 @@
 "use client";
 
-import DomeGallery from "@/components/gallery/DomeGallery";
 import Lightbox from "@/components/gallery/Lightbox";
-import MasonryGrid from "@/components/gallery/MasonryGrid";
+import GalleryGrid from "@/components/gallery/GalleryGrid";
 import SectionTitle from "@/components/SectionTitle";
 import axios from "axios";
 import { ImageIcon, LoaderCircle } from "lucide-react";
@@ -49,11 +48,6 @@ export default function GalleryPage() {
         </div>
       ) : (
         <>
-          <div className="hidden md:block mb-12">
-            <DomeGallery images={images.slice(0, 40)} onOpen={(index) => setOpen({ list: images.slice(0, 40), index })} />
-            <p className="text-center text-xs text-gray-500 dark:text-gray-400 -mt-4">Drag to explore · click a photo to view</p>
-          </div>
-
           <div className="px-4 md:px-10 container mx-auto">
             {categories.length > 0 && (
               <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
@@ -72,7 +66,7 @@ export default function GalleryPage() {
                 ))}
               </div>
             )}
-            <MasonryGrid images={filtered} onOpen={(index) => setOpen({ list: filtered, index })} />
+            <GalleryGrid images={filtered} onOpen={(index) => setOpen({ list: filtered, index })} />
           </div>
         </>
       )}
