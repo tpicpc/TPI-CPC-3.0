@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import {
+  MessagesSquare,
   ArrowLeft,
   Award,
   BarChart3,
@@ -46,6 +47,7 @@ const groups = [
       { href: "/admin/events", icon: CalendarDays, label: "Events" },
       { href: "/admin/workshops", icon: GraduationCap, label: "Workshops (LMS)" },
       { href: "/admin/blogs", icon: Newspaper, label: "Blogs" },
+      { href: "/admin/comments", icon: MessagesSquare, label: "Blog Comments" },
       { href: "/admin/gallery", icon: Images, label: "Gallery" },
       { href: "/admin/projects", icon: FolderGit2, label: "Projects" },
       { href: "/admin/forum", icon: HelpCircle, label: "Forum" },

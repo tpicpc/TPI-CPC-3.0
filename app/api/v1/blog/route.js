@@ -2,6 +2,7 @@ import { connectDB } from "@/lib/db";
 import { authError, requireAuth } from "@/lib/auth";
 import { fail, ok, serverError } from "@/lib/api-response";
 import { uploadFormFileToImgBB } from "@/lib/imgbb";
+import { parseSeo, uniqueSlug } from "@/lib/blog-server";
 import Blog from "@/models/Blog";
 
 export async function POST(req) {
@@ -23,12 +24,15 @@ export async function POST(req) {
 
     const blog = await Blog.create({
       title: data.title,
+      subtitle: (data.subtitle || "").slice(0, 300),
       description: data.description,
       image,
       author: data.author || "TPI CPC",
       tags: data.tags ? JSON.parse(data.tags) : [],
       status: "approved",
       approvedAt: new Date(),
+      seo: parseSeo(data.seo),
+      slug: await uniqueSlug(Blog, data.slug || data.title),
     });
     return ok({ blog }, "Blog published");
   } catch (e) {

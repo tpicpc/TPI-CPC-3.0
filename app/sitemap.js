@@ -1,4 +1,6 @@
+import { approvedBlogFilter } from "@/lib/blog-server";
 import { connectDB } from "@/lib/db";
+import { FEATURES } from "@/lib/features";
 import Blog from "@/models/Blog";
 import Workshop from "@/models/Workshop";
 
@@ -6,7 +8,7 @@ export default async function sitemap() {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://tpicpc.vercel.app";
 
   const staticPages = [
-    "", "about", "teams", "events", "workshop", "leaderboard",
+    "", "about", "teams", "events", "workshop", ...(FEATURES.leaderboard ? ["leaderboard"] : []),
     "blogs", "gallery", "contact", "faqs", "testimonials",
     "login", "signup",
   ].map((p) => ({
@@ -20,12 +22,12 @@ export default async function sitemap() {
   try {
     await connectDB();
     const [blogs, workshops] = await Promise.all([
-      Blog.find().select("_id updatedAt").lean(),
+      Blog.find(approvedBlogFilter).select("_id slug updatedAt").lean(),
       Workshop.find({ status: "Published" }).select("slug updatedAt").lean(),
     ]);
     dynamicPages = [
       ...blogs.map((b) => ({
-        url: `${baseUrl}/blogs/${b._id}`,
+        url: `${baseUrl}/blogs/${b.slug || b._id}`,
         lastModified: b.updatedAt || new Date(),
         changeFrequency: "monthly",
         priority: 0.6,

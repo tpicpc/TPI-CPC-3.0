@@ -33,7 +33,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${outfit.className} min-h-screen antialiased`}>
+      <body className={`${outfit.className} ${outfit.variable} min-h-screen antialiased`}>
         <Providers>{children}</Providers>
       </body>
     </html>

@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Blogs",
+  title: { default: "Blogs", template: "%s | TPI CPC" },
   description: "Articles, tutorials and stories from the TPI CPC community.",
 };
 
