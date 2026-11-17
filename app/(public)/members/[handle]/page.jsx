@@ -9,7 +9,7 @@ import { FEATURES } from "@/lib/features";
 import { formatDate } from "@/lib/utils";
 import axios from "axios";
 import {
-  Award, BadgeCheck, BookOpen, Calendar, CalendarCheck, Check, Code2, ExternalLink, Facebook, Flame, FolderGit2,
+  Award, BadgeCheck, BookOpen, Calendar, CalendarCheck, Check, Code2, ExternalLink, Facebook, FileText, Flame, FolderGit2,
   Github, Globe, Heart, Linkedin, Medal, Newspaper, PenLine, Share2, Star, Target, Trophy,
 } from "lucide-react";
 import Link from "next/link";
@@ -226,13 +226,19 @@ export default function MemberProfilePage() {
             <Section title="Certificates" icon={<Award size={18} />} count={certificates.length}>
               <div className="grid sm:grid-cols-2 gap-3">
                 {certificates.map((c) => (
-                  <Link key={c.number} href={`/certificate/${c.number}`} className={`${panel} p-4 flex items-start gap-3 hover:border-indigo-300 transition`}>
-                    <span className="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-400 to-orange-500 text-white flex items-center justify-center shrink-0"><Award size={18} /></span>
-                    <div className="min-w-0">
-                      <p className="font-semibold text-sm text-gray-900 dark:text-white line-clamp-2">{c.referenceTitle}</p>
-                      <p className="text-xs text-gray-500 mt-0.5 capitalize">{c.type === "course" ? "Course completion" : "Event participation"} · {formatDate(c.issuedAt)}</p>
+                  <div key={c.number} className={`${panel} group relative overflow-hidden p-4 flex items-start gap-3 hover:border-amber-300 dark:hover:border-amber-500/40 transition`}>
+                    <span className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500" />
+                    <span className="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 text-white flex items-center justify-center shrink-0 shadow-sm shadow-orange-500/30"><Award size={19} /></span>
+                    <div className="min-w-0 flex-1">
+                      <Link href={`/certificate/${c.number}`} className="font-semibold text-sm text-gray-900 dark:text-white line-clamp-2 hover:text-indigo-600 dark:hover:text-indigo-400">{c.referenceTitle}</Link>
+                      <p className="text-xs text-gray-500 mt-0.5">{c.type === "course" ? "Course completion" : "Event participation"} · {formatDate(c.issuedAt)}</p>
+                      <div className="mt-2 flex items-center gap-3 text-xs">
+                        <Link href={`/certificate/${c.number}`} className="inline-flex items-center gap-1 font-medium text-emerald-600 dark:text-emerald-400 hover:underline"><BadgeCheck size={13} /> Verified</Link>
+                        <a href={`/api/v1/certificates/pdf/${c.number}?inline=1`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-gray-500 hover:text-indigo-600"><FileText size={12} /> View PDF</a>
+                        <span className="text-gray-400 font-mono text-[10px] truncate hidden md:inline">{c.number}</span>
+                      </div>
                     </div>
-                  </Link>
+                  </div>
                 ))}
               </div>
             </Section>

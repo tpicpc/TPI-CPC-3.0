@@ -1,5 +1,5 @@
 export const metadata = {
   title: "Jobs & Internships",
-  description: "Internships and jobs shared with the TPI CPC community.",
+  description: "Software, diploma-engineering and Bangladesh government jobs and internships, auto-updated from public job boards, plus openings shared in TPI CPC.",
 };
 export default function Layout({ children }) { return children; }

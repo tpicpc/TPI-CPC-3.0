@@ -25,6 +25,7 @@ export const POST = withDB(async (req) => {
   const kinds = ["Internship", "Full-time", "Part-time", "Contract", "Remote"];
   const doc = await JobPost.create({
     title: s(b.title, 100), company: s(b.company, 80), kind: kinds.includes(b.kind) ? b.kind : "Internship",
+    category: ["swe", "diploma", "govt", "other"].includes(b.category) ? b.category : "swe",
     location: s(b.location, 80), description: s(b.description, 2000), applyUrl: s(b.applyUrl, 500), salary: s(b.salary, 60),
     deadline: b.deadline ? new Date(b.deadline) : null,
     tags: (Array.isArray(b.tags) ? b.tags : String(b.tags || "").split(",")).map((t) => s(t, 24)).filter(Boolean).slice(0, 8),

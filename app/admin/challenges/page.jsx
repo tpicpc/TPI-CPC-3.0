@@ -24,9 +24,13 @@ const fields = [
   { name: "published", label: "Published", type: "checkbox" },
   { name: "startsAt", label: "Opens at", type: "datetime" },
   { name: "endsAt", label: "Closes at", type: "datetime" },
-  { name: "description", label: "Description / hint", type: "textarea", rows: 3, span: 3 },
+  { name: "tags", label: "Tags (comma separated)", type: "tags", span: 3, placeholder: "greedy, math, implementation" },
+  { name: "description", label: "Short description / hint", type: "textarea", rows: 3, span: 3 },
+  { name: "statement", label: "Problem statement (optional)", type: "textarea", rows: 6, span: 3, help: "Shown in the statement panel on the challenge page. Keep the judge link as the official source." },
+  { name: "sampleInput", label: "Sample input", type: "textarea", rows: 3, span: 1 },
+  { name: "sampleOutput", label: "Sample output", type: "textarea", rows: 3, span: 1 },
 ];
-const defaults = { title: "", kind: "weekly", difficulty: "Medium", points: 10, platform: "codeforces", problemUrl: "", cfContestId: "", cfIndex: "", published: true, startsAt: "", endsAt: "", description: "" };
+const defaults = { title: "", kind: "weekly", difficulty: "Medium", points: 10, platform: "codeforces", problemUrl: "", cfContestId: "", cfIndex: "", published: true, startsAt: "", endsAt: "", description: "", tags: "", statement: "", sampleInput: "", sampleOutput: "" };
 
 function Submissions() {
   const [subs, setSubs] = useState([]);

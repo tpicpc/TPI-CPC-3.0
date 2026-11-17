@@ -1,10 +1,11 @@
 "use client";
 
 import ClubHero, { EmptyState, panel } from "@/components/club/ClubHero";
+import RoadmapGrid from "@/components/club/RoadmapGrid";
 import { CardGridSkeleton } from "@/components/skeletons";
 import { userApi } from "@/lib/api-client";
 import { LEVEL_STYLES } from "@/lib/club-format";
-import { ArrowRight, CheckCircle2, Compass, Mountain, Route, Sprout, TreePine } from "lucide-react";
+import { ArrowRight, CheckCircle2, Compass, Map as MapIcon, Mountain, Route, Sprout, TreePine } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
@@ -33,6 +34,10 @@ export default function LearnPage() {
     <div>
       <ClubHero eyebrow="Practice" icon={<Route size={14} />} title="Learning path"
         subtitle="A guided roadmap from your first loop to ICPC-level algorithms. Every topic has curated problems and resources picked by club mentors.">
+        <div className="mb-4 flex flex-wrap gap-2 text-sm">
+          <a href="#club-path" className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-indigo-500 text-white font-medium shadow-sm shadow-indigo-500/30"><Route size={14} /> Club problem-solving path</a>
+          <a href="#roadmaps" className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/80 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-700 dark:text-gray-300 font-medium hover:border-indigo-300"><MapIcon size={14} /> Career roadmaps (roadmap.sh)</a>
+        </div>
         {data?.loggedIn ? (
           <div className={`${panel} max-w-md p-4`}>
             <div className="flex items-center justify-between text-sm">
@@ -48,7 +53,7 @@ export default function LearnPage() {
         )}
       </ClubHero>
 
-      <div className="px-4 md:px-10 container mx-auto py-10">
+      <div id="club-path" className="px-4 md:px-10 container mx-auto py-10 scroll-mt-24">
         {loading ? <CardGridSkeleton count={6} /> : !data?.topics?.length ? (
           <EmptyState icon={<Compass size={20} />} title="The roadmap is being prepared">Mentors are curating topics — check back soon.</EmptyState>
         ) : (
@@ -99,6 +104,12 @@ export default function LearnPage() {
             })}
           </div>
         )}
+      </div>
+
+      <div className="px-4 md:px-10 container mx-auto pb-14">
+        <div className="border-t border-gray-200/70 dark:border-white/10 pt-10">
+          <RoadmapGrid />
+        </div>
       </div>
     </div>
   );

@@ -26,7 +26,7 @@ export async function GET(_req, { params }) {
     const user = await User.findOne(query)
       .select(
         "fullName username profileImage department shift rollNumber session createdAt emailVerified " +
-          "headline bio skills github linkedin facebook website handles badges points"
+          "headline bio skills github linkedin facebook website handles badges points showCertificates"
       )
       .lean();
     if (!user) return fail("Member not found", 404);
@@ -41,7 +41,10 @@ export async function GET(_req, { params }) {
         select: "title slug thumbnail category level",
         model: Workshop,
       }).lean(),
-      Certificate.find({ user: user._id }).sort({ issuedAt: -1 }).select("number type referenceTitle issuedAt").lean(),
+      // Only certificates the member chose to show (verification by number is unaffected)
+      user.showCertificates === false
+        ? []
+        : Certificate.find({ user: user._id, hiddenOnProfile: { $ne: true } }).sort({ issuedAt: -1 }).select("number type referenceTitle issuedAt instructor").lean(),
       ChallengeSubmission.countDocuments({ user: user._id, status: "accepted" }),
       EventRegistration.countDocuments({ user: user._id, status: "attended" }),
       getUserCpStats(user).catch(() => ({})),
@@ -50,6 +53,7 @@ export async function GET(_req, { params }) {
     const strip = (s) => s && { rating: s.rating, maxRating: s.maxRating, rank: s.rank, solved: s.solved, contests: s.contests, ok: s.ok, displayHandle: s.displayHandle, fetchedAt: s.fetchedAt };
     const stats = Object.fromEntries(Object.entries(cpStats).map(([k, v]) => [k, strip(v)]));
 
+    delete user.showCertificates;
     return ok({
       member: user,
       projects: projects.map((p) => ({ ...p, likeCount: (p.likes || []).length, likes: undefined })),
