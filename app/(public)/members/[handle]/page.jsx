@@ -106,7 +106,7 @@ export default function MemberProfilePage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {blogs.map((b) => (
-              <Link key={b._id} href={`/blogs/${b._id}`} className="group rounded-xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 backdrop-blur-sm overflow-hidden hover:shadow-xl transition-all">
+              <Link key={b._id} href={`/blogs/${b.slug || b._id}`} className="group rounded-xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-white/5 backdrop-blur-sm overflow-hidden hover:shadow-xl transition-all">
                 <div className="aspect-video bg-gray-100 dark:bg-gray-800 overflow-hidden">
                   <img src={b.image} alt={b.title} className="w-full h-full object-cover group-hover:scale-105 transition" />
                 </div>

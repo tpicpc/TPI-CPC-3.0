@@ -94,7 +94,7 @@ export default function HomePage() {
           <>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {blogs.map((b) => (
-                <Link key={b._id} href={`/blogs/${b._id}`} className="rounded-xl border border-gray-200 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-sm overflow-hidden hover:bg-white dark:hover:bg-white/10 transition">
+                <Link key={b._id} href={`/blogs/${b.slug || b._id}`} className="rounded-xl border border-gray-200 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-sm overflow-hidden hover:bg-white dark:hover:bg-white/10 transition">
                   <img src={b.image} alt={b.title} className="w-full h-48 object-cover" />
                   <div className="p-5">
                     <h3 className="font-bold text-gray-900 dark:text-white line-clamp-2">{b.title}</h3>

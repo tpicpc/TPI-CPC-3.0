@@ -1,5 +1,6 @@
 "use client";
 
+import JoinButton from "@/components/JoinButton";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useUser } from "@/contexts/UserContext";
@@ -247,12 +248,19 @@ export default function Navbar() {
               </AnimatePresence>
             </div>
           ) : (
-            <Button
-              onClick={() => router.push("/signup")}
-              className="hidden sm:inline-flex h-9 px-5 rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 hover:opacity-90 text-white shadow-md shadow-indigo-500/20"
-            >
-              Join Us
-            </Button>
+            <div className="flex items-center gap-1 sm:gap-2">
+              <Link
+                href="/login"
+                className={`hidden md:inline-flex items-center h-9 px-3 rounded-full text-sm font-medium transition ${
+                  isActive("/login")
+                    ? "text-indigo-600 dark:text-indigo-300"
+                    : "text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10"
+                }`}
+              >
+                Sign in
+              </Link>
+              <JoinButton size="sm" className="px-3.5 sm:px-4" aria-current={isActive("/signup") ? "page" : undefined} />
+            </div>
           )}
 
           <button
@@ -428,18 +436,9 @@ export default function Navbar() {
                   </Button>
                 ) : (
                   <div className="flex flex-col gap-2">
-                    <Button
-                      onClick={() => router.push("/signup")}
-                      className="w-full h-11 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 hover:opacity-90 text-white shadow-md shadow-indigo-500/20"
-                    >
-                      Join Us
-                    </Button>
-                    <Button
-                      onClick={() => router.push("/login")}
-                      variant="outline"
-                      className="w-full h-11 rounded-xl"
-                    >
-                      <LogIn size={16} className="mr-2" /> Sign in
+                    <JoinButton size="lg" icon label="Join TPI CPC — it's free" showArrow={false} className="w-full rounded-xl h-11 text-sm" />
+                    <Button asChild variant="outline" className="w-full h-11 rounded-xl">
+                      <Link href="/login"><LogIn size={16} className="mr-2" /> Sign in</Link>
                     </Button>
                   </div>
                 )}

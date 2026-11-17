@@ -10,7 +10,7 @@ export default function AuthLayout({ children }) {
         <Navbar />
       </header>
       <main className="min-h-[60vh] container mx-auto px-4 md:px-10 py-12 flex justify-center">
-        <div className="w-full max-w-md">{children}</div>
+        <div className="w-full max-w-md has-[.auth-wide]:max-w-5xl">{children}</div>
       </main>
       <Footer />
     </>

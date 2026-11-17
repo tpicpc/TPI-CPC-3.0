@@ -89,7 +89,7 @@ export default function BlogsPage() {
             {visible.map((b) => (
               <Link
                 key={b._id}
-                href={`/blogs/${b._id}`}
+                href={`/blogs/${b.slug || b._id}`}
                 className="rounded-xl border bg-white dark:bg-gray-900 overflow-hidden hover:shadow-xl transition"
               >
                 <img src={b.image} alt={b.title} className="w-full h-48 object-cover" />

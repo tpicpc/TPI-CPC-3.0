@@ -36,17 +36,17 @@ export default function AboutSection() {
           <div className="flex flex-wrap items-center gap-3 pt-2">
             <Tooltip>
               <TooltipTrigger asChild>
-                <a href="https://web.facebook.com/groups/tpicpc" target="_blank" rel="noopener noreferrer">
-                  <Button variant="destructive">Join Our Community</Button>
-                </a>
+                <Button asChild className="rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 hover:opacity-90 text-white shadow-md shadow-indigo-500/20">
+                  <a href="https://web.facebook.com/groups/tpicpc" target="_blank" rel="noopener noreferrer">Join Our Community</a>
+                </Button>
               </TooltipTrigger>
               <TooltipContent><p>Join our official Facebook community</p></TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
-                <a href="https://web.facebook.com/TPICPCThakurgonPolytechnicInstitute" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline">Follow Us</Button>
-                </a>
+                <Button asChild variant="outline" className="rounded-full">
+                  <a href="https://web.facebook.com/TPICPCThakurgonPolytechnicInstitute" target="_blank" rel="noopener noreferrer">Follow Us</a>
+                </Button>
               </TooltipTrigger>
               <TooltipContent><p>Follow our official Facebook page</p></TooltipContent>
             </Tooltip>

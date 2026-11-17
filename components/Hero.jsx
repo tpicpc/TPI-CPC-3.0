@@ -1,10 +1,14 @@
 "use client";
 
 import FlipWords from "@/components/FlipWords";
+import JoinButton from "@/components/JoinButton";
+import { useUser } from "@/contexts/UserContext";
+import { Facebook } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 export default function Hero() {
+  const { userData } = useUser();
   return (
     <section className="pt-20">
       <div className="flex flex-col items-center text-center">
@@ -35,19 +39,26 @@ export default function Hero() {
           At TPI CPC, we bring together technology-loving students where everyone can learn something new, write code, and reach new heights in the programming world. We organize competitions, workshops, and various innovative activities to help our members grow.
         </p>
         <div className="mt-8 flex items-center justify-center gap-3 flex-wrap">
+          {userData ? (
+            <JoinButton size="lg" href="/dashboard" label="Go to your dashboard" />
+          ) : (
+            <JoinButton size="lg" label="Join TPI CPC" />
+          )}
           <Tooltip>
             <TooltipTrigger asChild>
-              <a target="_blank" href="https://web.facebook.com/groups/tpicpc" rel="noopener noreferrer">
-                <Button variant="destructive">Join Our Community</Button>
-              </a>
+              <Button asChild variant="outline" className="h-12 px-6 rounded-full text-base">
+                <a target="_blank" href="https://web.facebook.com/groups/tpicpc" rel="noopener noreferrer">
+                  <Facebook size={17} className="mr-2 text-[#1877F2]" /> Join our community
+                </a>
+              </Button>
             </TooltipTrigger>
-            <TooltipContent><p>Join our official Facebook community</p></TooltipContent>
+            <TooltipContent><p>Join our official Facebook group</p></TooltipContent>
           </Tooltip>
           <Tooltip>
             <TooltipTrigger asChild>
-              <a target="_blank" href="https://web.facebook.com/TPICPCThakurgonPolytechnicInstitute" rel="noopener noreferrer">
-                <Button variant="outline">Follow Us</Button>
-              </a>
+              <Button asChild variant="ghost" className="h-12 px-5 rounded-full text-base">
+                <a target="_blank" href="https://web.facebook.com/TPICPCThakurgonPolytechnicInstitute" rel="noopener noreferrer">Follow us</a>
+              </Button>
             </TooltipTrigger>
             <TooltipContent><p>Follow our official Facebook page</p></TooltipContent>
           </Tooltip>
