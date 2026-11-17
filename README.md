@@ -89,6 +89,16 @@ npm run import:live
 
 If `EMAIL_*` vars are unset, OTPs are logged to the server console (fine for dev).
 
+### Club features (contests, challenges, events, notices…)
+
+No new environment variables are required.
+
+- **Contest tracker** (`/contests`) pulls upcoming rounds from the public Codeforces API, CodeChef's public contest list JSON and AtCoder's contests page. Results are cached in MongoDB (`cacheentries`) for 30 minutes. If one source is down, the others still render.
+- **Member handles**: Codeforces / CodeChef / AtCoder ratings are fetched on demand and cached for 6 hours (`handlestats`). CodeChef and AtCoder have no official API, so their profile pages / rating history JSON are parsed, and markup changes there can break those two sources.
+- **Notice board emails** use the existing Gmail mailer. When `EMAIL_USER` / `EMAIL_PASS` are missing, in-site notifications are still created and the email step is skipped.
+- **Event certificates** are generated as PDFs on the fly (`/api/v1/certificates/pdf/<number>`), with a QR that links to the public verify page (`NEXT_PUBLIC_APP_URL`).
+- All new fields and collections are optional/additive, so no migration is needed. Existing events have online registration **off** until it is enabled from *Admin → Events → Registrations*.
+
 ---
 
 ## Folder structure

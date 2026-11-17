@@ -10,6 +10,7 @@ export default async function sitemap() {
   const staticPages = [
     "", "about", "teams", "events", "workshop", ...(FEATURES.leaderboard ? ["leaderboard"] : []),
     "blogs", "gallery", "contact", "faqs", "testimonials",
+    "contests", "challenges", "learn", "notices", "calendar", "alumni", "jobs",
     "login", "signup",
   ].map((p) => ({
     url: `${baseUrl}/${p}`,

@@ -3,6 +3,7 @@ import AuthorAvatar from "@/components/blog/AuthorAvatar";
 import CommentsSection from "@/components/blog/CommentsSection";
 import LikeButton from "@/components/blog/LikeButton";
 import ReadingProgress from "@/components/blog/ReadingProgress";
+import ViewBeacon from "@/components/blog/ViewBeacon";
 import ShareBar from "@/components/blog/ShareBar";
 import { excerpt, readingTime } from "@/lib/blog-content";
 import { articleSerif } from "@/lib/fonts";
@@ -42,6 +43,7 @@ export default function ArticleView({ blog, author, html, related = [], preview 
   return (
     <div className={`${articleSerif.variable} bg-background`}>
       {!preview && <ReadingProgress />}
+      {!preview && <ViewBeacon id={String(blog._id)} />}
       <article className="pb-6">
         <header className="mx-auto max-w-[728px] px-5 sm:px-6 pt-8 md:pt-14">
           {!preview && (

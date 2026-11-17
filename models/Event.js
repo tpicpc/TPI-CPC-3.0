@@ -12,6 +12,11 @@ const eventSchema = new mongoose.Schema(
     endTime: { type: String, default: "" },
     status: { type: String, required: true, enum: ["Upcoming", "Ongoing", "Completed"], default: "Upcoming" },
     eventImage: { type: String, required: true },
+    // Online registration / attendance (optional, managed from Admin → Events → Registrations)
+    registrationEnabled: { type: Boolean, default: false },
+    capacity: { type: Number, default: 0 }, // 0 = unlimited
+    registrationDeadline: { type: Date, default: null },
+    certificatesEnabled: { type: Boolean, default: true },
   },
   { timestamps: true }
 );

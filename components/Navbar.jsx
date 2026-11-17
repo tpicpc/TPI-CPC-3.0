@@ -1,5 +1,7 @@
 "use client";
 
+import ExploreMenu, { ExploreDrawerSection } from "@/components/club/ExploreMenu";
+import NotificationBell from "@/components/club/NotificationBell";
 import JoinButton from "@/components/JoinButton";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -128,6 +130,7 @@ export default function Navbar() {
               </li>
             );
           })}
+          <ExploreMenu />
         </ul>
 
         <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
@@ -155,6 +158,8 @@ export default function Navbar() {
               <LoaderCircle className="animate-spin h-5 w-5 text-gray-500" />
             </div>
           ) : userData ? (
+            <>
+            <NotificationBell />
             <div className="relative" ref={dropdownRef}>
               <button
                 className="flex items-center gap-1.5 sm:gap-2 pl-1 pr-1.5 sm:pr-2 py-1 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition"
@@ -247,6 +252,7 @@ export default function Navbar() {
                 )}
               </AnimatePresence>
             </div>
+            </>
           ) : (
             <div className="flex items-center gap-1 sm:gap-2">
               <Link
@@ -353,6 +359,8 @@ export default function Navbar() {
                     ))}
                   </ul>
                 </div>
+
+                <ExploreDrawerSection isActive={(p) => pathname === p || pathname.startsWith(`${p}/`)} />
 
                 {userData && (
                   <div className="px-3 pt-2 pb-2">

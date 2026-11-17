@@ -12,6 +12,9 @@ const leaderboardSchema = new mongoose.Schema(
     badge: { type: String, default: "" },
     handle: { type: String, default: "" },
     year: { type: Number, default: () => new Date().getFullYear(), index: true },
+    // Set when the entry is maintained automatically from challenge points
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", default: null, index: true },
+    source: { type: String, default: "manual" },
   },
   { timestamps: true }
 );
