@@ -16,6 +16,24 @@ const userSchema = new mongoose.Schema(
     emailVerified: { type: Boolean, default: false },
     verifyOtp: { type: Number, default: null },
     verifyOtpExpiresAt: { type: Date, default: null },
+    // ---- Public portfolio (all optional) ----
+    headline: { type: String, default: "", maxlength: 120 },
+    bio: { type: String, default: "", maxlength: 600 },
+    skills: [{ type: String }],
+    github: { type: String, default: "" },
+    linkedin: { type: String, default: "" },
+    facebook: { type: String, default: "" },
+    website: { type: String, default: "" },
+    handles: {
+      codeforces: { type: String, default: "" },
+      codechef: { type: String, default: "" },
+      atcoder: { type: String, default: "" },
+    },
+    // Admin-awarded badges (automatic badges are computed on the fly)
+    badges: [{ type: String }],
+    // Points earned from weekly/daily challenges
+    points: { type: Number, default: 0 },
+    emailNotifications: { type: Boolean, default: true },
   },
   { timestamps: true }
 );

@@ -8,6 +8,11 @@ import {
   BarChart3,
   Bell,
   BookOpen,
+  Briefcase,
+  ChartColumn,
+  Megaphone,
+  Route,
+  Target,
   CalendarDays,
   FileText,
   FolderGit2,
@@ -30,7 +35,10 @@ import { usePathname } from "next/navigation";
 const groups = [
   {
     label: "Overview",
-    items: [{ href: "/admin", icon: LayoutDashboard, label: "Dashboard" }],
+    items: [
+      { href: "/admin", icon: LayoutDashboard, label: "Dashboard" },
+      { href: "/admin/analytics", icon: ChartColumn, label: "Analytics" },
+    ],
   },
   {
     label: "People",
@@ -55,6 +63,16 @@ const groups = [
       { href: "/admin/certificates", icon: Award, label: "Certificates" },
       { href: "/admin/notices", icon: Bell, label: "Notice Bar" },
       { href: "/admin/reviews", icon: MessageSquare, label: "Reviews" },
+    ],
+  },
+  {
+    label: "Club",
+    items: [
+      { href: "/admin/announcements", icon: Megaphone, label: "Notice Board" },
+      { href: "/admin/challenges", icon: Target, label: "Challenges" },
+      { href: "/admin/learning", icon: Route, label: "Learning Path" },
+      { href: "/admin/alumni", icon: GraduationCap, label: "Alumni" },
+      { href: "/admin/jobs", icon: Briefcase, label: "Jobs & Internships" },
     ],
   },
   {

@@ -4,6 +4,8 @@ import { cn } from "@/lib/utils";
 import {
   Award,
   BookOpen,
+  CalendarCheck,
+  IdCard,
   FolderGit2,
   HelpCircle,
   LayoutDashboard,
@@ -19,6 +21,8 @@ import { usePathname } from "next/navigation";
 const items = [
   { href: "/dashboard", icon: LayoutDashboard, label: "Overview", exact: true },
   { href: "/dashboard/profile", icon: User, label: "Profile" },
+  { href: "/dashboard/portfolio", icon: IdCard, label: "Public profile" },
+  { href: "/dashboard/events", icon: CalendarCheck, label: "My Events" },
   { href: "/dashboard/enrollments", icon: BookOpen, label: "My Courses" },
   { href: "/dashboard/certificates", icon: Award, label: "Certificates" },
   ...(FEATURES.projects ? [{ href: "/dashboard/projects", icon: FolderGit2, label: "My Projects" }] : []),

@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { adminApi } from "@/lib/api-client";
 import { formatDateTime } from "@/lib/utils";
-import { ArrowDownUp, Edit, LoaderCircle, Mail, Plus, RotateCcw, Search, Send, Trash2 } from "lucide-react";
+import { ArrowDownUp, Edit, LoaderCircle, Mail, Plus, QrCode, RotateCcw, Search, Send, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
@@ -260,6 +260,11 @@ export default function EventListPage() {
                   <Link href={`/admin/events/${e._id}`}>
                     <Button variant="outline" size="sm">
                       <Edit size={14} className="mr-1" /> Edit
+                    </Button>
+                  </Link>
+                  <Link href={`/admin/events/${e._id}/registrations`}>
+                    <Button variant="outline" size="sm">
+                      <QrCode size={14} className="mr-1" /> Registrations
                     </Button>
                   </Link>
                   {(e.status === "Upcoming" || e.status === "Ongoing") && (

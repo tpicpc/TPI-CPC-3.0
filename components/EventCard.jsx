@@ -1,7 +1,8 @@
 "use client";
 
 import { formatDateTime } from "@/lib/utils";
-import { Calendar, Clock, MapPin, Sparkles } from "lucide-react";
+import { ArrowRight, Calendar, Clock, MapPin, Sparkles } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 function DateStamp({ startTime }) {
@@ -125,6 +126,9 @@ export default function EventCard({ event, layout = "vertical" }) {
           <div className="flex items-center gap-1.5"><MapPin size={12} /> {event.location}</div>
           {isUpcoming && <Countdown startTime={event.startTime} />}
         </div>
+        <Link href={`/events/${event._id}`} className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">
+          {event.registrationEnabled && event.status !== "Completed" ? "Details & register" : "View details"} <ArrowRight size={14} />
+        </Link>
       </div>
     </div>
   );
