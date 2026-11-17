@@ -33,7 +33,14 @@ export const POST = withAuth("user", async (req, { params }, me) => {
     } catch {
       return fail("Couldn't reach Codeforces right now — try again or submit a link", 502);
     }
-    if (!hit) return fail(`No accepted submission by ${handle} for ${c.cfContestId}${c.cfIndex} since the challenge started`, 404);
+    if (!hit) {
+      const message = `No accepted submission by ${handle} for ${c.cfContestId}${c.cfIndex} since the challenge started`;
+      // keep a history entry (and mark the problem as attempted unless a review is pending)
+      if (!sub) sub = new ChallengeSubmission({ challenge: id, user: me.id, name: user.fullName, status: "attempted", method: "auto" });
+      sub.attempts = [...(sub.attempts || []), { at: new Date(), method: "auto", result: "failed", message }].slice(-30);
+      await sub.save();
+      return fail(message, 404);
+    }
     const autoLink = `https://codeforces.com/contest/${c.cfContestId}/submission/${hit.id}`;
     if (!sub) sub = new ChallengeSubmission({ challenge: id, user: me.id });
     sub.name = user.fullName;
@@ -51,6 +58,7 @@ export const POST = withAuth("user", async (req, { params }, me) => {
   sub.note = String(note).slice(0, 300);
   sub.status = "pending";
   sub.method = "manual";
+  sub.attempts = [...(sub.attempts || []), { at: new Date(), method: "manual", result: "pending", link: url }].slice(-30);
   await sub.save();
   return ok({ submission: sub }, "Submitted — an admin will review it soon");
 });

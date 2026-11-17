@@ -18,6 +18,8 @@ const certificateSchema = new mongoose.Schema(
     issuedAt: { type: Date, default: Date.now },
     issuedBy: { type: mongoose.Schema.Types.ObjectId, ref: "Admin" },
     grade: { type: String, default: "" },
+    // Member's choice: hide this certificate from their public profile (verify link still works)
+    hiddenOnProfile: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

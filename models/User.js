@@ -34,6 +34,8 @@ const userSchema = new mongoose.Schema(
     // Points earned from weekly/daily challenges
     points: { type: Number, default: 0 },
     emailNotifications: { type: Boolean, default: true },
+    // Show the certificates section on the public profile (per-certificate toggle lives on Certificate)
+    showCertificates: { type: Boolean, default: true },
   },
   { timestamps: true }
 );

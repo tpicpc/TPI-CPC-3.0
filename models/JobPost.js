@@ -5,6 +5,8 @@ const jobPostSchema = new mongoose.Schema(
     title: { type: String, required: true },
     company: { type: String, required: true },
     kind: { type: String, enum: ["Internship", "Full-time", "Part-time", "Contract", "Remote"], default: "Internship", index: true },
+    // Which board tab it belongs to (optional; older posts default to software/CSE)
+    category: { type: String, enum: ["swe", "diploma", "govt", "other"], default: "swe" },
     location: { type: String, default: "" },
     description: { type: String, default: "" },
     applyUrl: { type: String, default: "" },
